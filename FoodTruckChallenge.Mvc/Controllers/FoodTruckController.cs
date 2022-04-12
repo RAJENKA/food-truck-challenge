@@ -28,9 +28,10 @@ namespace food_truck_challenge.Controllers
             return Ok(task);
         }
 
+
         [HttpGet]
         [Route("location")]
-        public async Task<IActionResult> Get(double? lat, double? lon)
+        public async Task<IActionResult> Get(double? lat, double? lon, double radius = 0.1)
         {
             if(lat == null || lon == null)
             {
@@ -40,7 +41,8 @@ namespace food_truck_challenge.Controllers
 
             var task = await Task.Run(() =>
             {
-                return _foodTruckManager.GetFoodTrucksWithinArea(lat.Value, lon.Value);
+                //You can also request Device location based data instead of askign user for the lat/long input
+                return _foodTruckManager.GetFoodTrucksWithinArea(lat.Value, lon.Value, radius);
             });
 
             return Ok(task);

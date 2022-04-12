@@ -8,11 +8,7 @@ namespace FoodTruckChallenge.Models
     {
         public string LocationId { get; set; }
 
-        public string Applicant { get; set; }
-
         public string FacilityType { get; set; }
-
-        public string Cnn { get; set; }
 
         public string LocationDescription { get; set; }
 
@@ -42,16 +38,9 @@ namespace FoodTruckChallenge.Models
 
         public string DaysHours { get; set; }
 
-        public DateTime? NOISent { get; set; }
-
         public DateTime? Approved { get; set; }
-
-        public DateTime? Received { get; set; }
-
-        public bool? PriorPermit { get; set; }
 
         public DateTime? ExpirationDate { get; set; }
 
-        //public string Location { get; set; }
     }
 }
