@@ -2,10 +2,10 @@
  - API returns the details of the food trucks, which are legal, approved and operational within specified radius.
 
  ## Repository content
- - MobileFoodFacilitiesService:  Service interface to fetch the food truck data from gov. open data source. Isolated from the client. Can be changed using Dependency Injection Config.
- - FoodTruckChallenge: Business logic to co-ordinate between the API layer and external services layer along with required geo calcuations. Also has the interfance as to data source via cache. Uses .NET Core InMemory cache to avoid reloading the data. 
- - FoodTruckChallenge.Mvc: API layer to expose the required endpoints for clients to consume.
- - MobileFoodService.Tests: Test cases
+ - **MobileFoodFacilitiesService**:  Service interface to fetch the food truck data from gov. open data source. Isolated from the client. Can be changed using Dependency Injection Config.
+ - **FoodTruckChallenge**: Business logic to co-ordinate between the API layer and external services layer along with required geo calcuations. Also has the interfance as to data source via cache. Uses .NET Core InMemory cache to avoid reloading the data. 
+ - **FoodTruckChallenge.Mvc**: API layer to expose the required endpoints for clients to consume.
+ - **MobileFoodService.Tests**: Test cases
 
 
  ## Setup
