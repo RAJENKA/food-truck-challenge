@@ -23,3 +23,10 @@
 ## Reference 
 Uses Geolocation nuget package for distance calculations and defining the block withing the given radius.
 https://github.com/scottschluer/geolocation
+
+
+## Behind the scenes
+- When I started reading through the problem, there were lot of questions on my mind to tackle something that I never did mainly around the locations data. But at the same time it seemed achievable in given time frame. Few steps I took,
+1. Quickly learned about the Food Truck data API and their documentation. The API response content was overwhelming to write a parser, so I was looking for some client SDK that can help. While going throuhg their Developer documentation I found about the access strategy as well as the available SDK. This was a breather in time crunch situation.
+2. Secondly, I was looking to explore around how the location data is interpreted and consumed. I was focused on searching the solution which can give me long, lat and radius based search. I came across the Scott Schluer's solution for .NET core apps which solves this problem.
+3. Now, there were lot of thoughts around how do I approach this solution. Just the API/CLI/WEB or a Console app, all this was on the table but to focus on problem I sticked with the API first strategy and kep client side as an option if time permits since swagger api was an option with Web API.
