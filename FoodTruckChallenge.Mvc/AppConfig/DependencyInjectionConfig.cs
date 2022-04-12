@@ -13,6 +13,7 @@ namespace food_truck_challenge.AppConfig
         {
             services.AddMemoryCache();
 
+            services.AddLogging();
             services.AddTransient<IFoodTruckRepository, FoodTruckRepository>();
             services.AddTransient<ICacheService, CacheService>();
             services.AddTransient<IFacilitiesService, FacilitiesService>();

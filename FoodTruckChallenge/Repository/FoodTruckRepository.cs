@@ -1,5 +1,6 @@
 ﻿using FoodTruckChallenge.Extensions;
 using FoodTruckChallenge.Models;
+using Microsoft.Extensions.Logging;
 using MobileFoodFacilitiesService;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,13 @@ namespace FoodTruckChallenge
 
         private ICacheService _cacheService;
         private IFoodTruckService _foodTruckService;
+        private ILogger<FoodTruckRepository> _logger;
 
-        public FoodTruckRepository(ICacheService cacheService, IFoodTruckService foodTruckService)
+        public FoodTruckRepository(ICacheService cacheService, IFoodTruckService foodTruckService, ILogger<FoodTruckRepository> logger)
         {
             _cacheService = cacheService;
             _foodTruckService = foodTruckService;
+            _logger = logger;
         }
 
         public IEnumerable<FoodTruck> GetFoodTruckFacilities()
@@ -29,7 +32,16 @@ namespace FoodTruckChallenge
 
         private IEnumerable<FoodTruck> GetFoodTruckData()
         {
-            return _cacheService.GetOrSet(FoodTruckCacheKey, GetDataFromPersistentStore, TimeSpan.FromMinutes(CacheExpirationInMin));
+            try
+            {
+                return _cacheService.GetOrSet(FoodTruckCacheKey, GetDataFromPersistentStore, TimeSpan.FromMinutes(CacheExpirationInMin));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Unable to retrieve the data for mobile facilities.", ex);
+
+                throw;
+            }
         }
 
         private IEnumerable<FoodTruck> GetDataFromPersistentStore()

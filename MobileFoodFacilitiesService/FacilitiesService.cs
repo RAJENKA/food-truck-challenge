@@ -18,11 +18,6 @@ namespace MobileFoodFacilitiesService
         public IEnumerable<MobileFacility> GetFacilities()
         {
 
-            //read metadata of a dataset using the resource identifier (Socrata 4x4)
-            var metadata = _sodaClient.GetMetadata("rqzj-sfat");
-            Console.WriteLine("{0} has {1} views.", metadata.Name, metadata.ViewsCount);
-
-            //of course, a custom type can be used as long as it is JSON serializable
             var dataset2 = _sodaClient.GetResource<MobileFacility>("rqzj-sfat");
 
             return dataset2.GetRows();

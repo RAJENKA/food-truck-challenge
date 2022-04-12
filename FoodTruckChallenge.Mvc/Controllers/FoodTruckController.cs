@@ -1,4 +1,6 @@
 ﻿using FoodTruckChallenge;
+using FoodTruckChallenge.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ namespace food_truck_challenge.Controllers
     {
         private IFoodTruckRepository _foodTruckRepository;
         private FoodTruckManager _foodTruckManager;
+
         public FoodTruckController(IFoodTruckRepository foodTruckRepository, FoodTruckManager foodTruckManager)
         {
             _foodTruckRepository = foodTruckRepository;
@@ -24,28 +27,30 @@ namespace food_truck_challenge.Controllers
             {
                 return _foodTruckRepository.GetFoodTruckFacilities();
             });
-            
+
             return Ok(task);
         }
 
-
         [HttpGet]
         [Route("location")]
-        public async Task<IActionResult> Get(double? lat, double? lon, double radius = 0.1)
+        [ProducesResponseType(typeof(IEnumerable<PointBlockFoodTruck>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResult), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Get(double? latitude, double? longitude, double? radiusInMiles)
         {
-            if(lat == null || lon == null)
+            //Add Validator for legit lat/long values
+            if (latitude == null || longitude == null || radiusInMiles == null)
             {
                 return BadRequest("Invalid input");
             }
 
 
-            var task = await Task.Run(() =>
+            var result = await Task.Run(() =>
             {
-                //You can also request Device location based data instead of askign user for the lat/long input
-                return _foodTruckManager.GetFoodTrucksWithinArea(lat.Value, lon.Value, radius);
+                return _foodTruckManager.GetFoodTrucksWithinArea(latitude.Value, longitude.Value, radiusInMiles.Value);
             });
 
-            return Ok(task);
+            return result.Item2 != null ? StatusCode(StatusCodes.Status500InternalServerError, result.Item2) : Ok(result.Item1);
         }
     }
 }
