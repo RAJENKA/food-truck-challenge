@@ -18,6 +18,8 @@
 
 - Data from external source is cached for 30 mins
 
+- Solution relies on client SDK implementation of SODA API endpoints https://www.nuget.org/packages/CSM.SodaDotNet/
+
 ## Reference 
 Uses Geolocation nuget package for distance calculations and defining the block withing the given radius.
 https://github.com/scottschluer/geolocation
