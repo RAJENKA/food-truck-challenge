@@ -1,4 +1,4 @@
-## Food truck finder based on user entered geo coordinates (Latitude, Longitude) for the cisty of San Franscisco
+## Food truck finder based on user entered geo coordinates (Latitude, Longitude) for the city of San Franscisco
  - API returns the details of the food trucks, which are legal, approved and operation within specified radius.
 
  ## Repository content
